@@ -11,12 +11,3 @@ if(dataOfBox !== null) {
     checkbox.checked = dataOfBox
 }
 
-// show today's date
-const today = new Date()
-
-const formattedDate = today.toLocaleDateString('en-US', {
-    month: 'short', 
-    day: '2-digit'
-  });
-
-document.getElementById('current-date').textContent = formattedDate
