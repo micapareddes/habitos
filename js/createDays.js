@@ -1,16 +1,20 @@
 const root = document.getElementById('root')
-const previousDays = 0
-const nextDays = 6
+const previousDays = 10
 
 function createSection() {
     const section = document.createElement('section')
+    section.classList = "block-of-days"
     return section
 }
 
 function createDiv() {
     const div = document.createElement('div')
-    div.classList = "day-block"
     return div
+}
+
+function createP() {
+    const p = document.createElement('p')
+    return p
 }
 
 function createSpan() {
@@ -18,56 +22,67 @@ function createSpan() {
     return span
 }
 
+function createMonth(offsetDays = 0) {
+    const date = new Date()
+    date.setDate(date.getDate() - offsetDays)
+
+    return date.toLocaleDateString('en-US', {
+        month: 'short'
+    });
+}
+
 function createDay(offsetDays = 0) {
     const date = new Date()
-    date.setDate(date.getDate() + offsetDays)
+    date.setDate(date.getDate() - offsetDays)
     
     return date.toLocaleDateString('en-US', {
-            month: 'short',
             day: '2-digit'
         });
     
 }
 
-function createCheckbox(n, section) {
+function createCheckbox(month, day, section) {
     const input = document.createElement('input')
     input.type = "checkbox"
     input.name = "checkbox"
     input.classList = "hidden-checkbox"
-    input.id = section + n
+    input.id = section + month + day
     
     const label = document.createElement('label')
-    label.htmlFor = section + n
+    label.htmlFor = section + month + day
     label.classList = "checkbox"
 
     return [input, label]
 }
 
-// function saveCheckboxState(checkbox, id) {
-//     checkbox.addEventListener('change', () => {
-//         localStorage.setItem(`${id}`, JSON.stringify(checkbox.checked));
-//     })
-    
-//     const dataOfBox = JSON.parse(localStorage.getItem(`${id}`))
-    
-//     if(dataOfBox !== null) {
-//         return checkbox.checked = dataOfBox
-//     }
-// }
-
-function createDayBlock(offsetDays = 0, id) {
+function generateDayBlock(offsetDays = 0, id) {
     const div = createDiv()
-    const span = createSpan()
-    const day = createDay(offsetDays)
-    const [input, label] = createCheckbox(day, id)
+    div.classList = "day-block"
 
-    div.appendChild(span) 
+    const divDate = createDiv()
+    divDate.classList = "date"
+
+    const p = createP()
+
+    const month = createMonth(offsetDays)
+
+    const span = createSpan()
+
+    const day = createDay(offsetDays)
+    if (offsetDays === 0){
+        span.classList.add("current-day")
+    }
+    const [input, label] = createCheckbox(month, day, id)
+
+
+    div.appendChild(divDate)
+    divDate.appendChild(p)
+    p.textContent = month
+    divDate.appendChild(span) 
     span.textContent = day
 
     div.appendChild(input) 
     div.appendChild(label) 
-    
-    // saveCheckboxState(input, day)
 
     return div
 }
@@ -77,14 +92,9 @@ function generateDaysSection(id) {
     section.id = id
     root.appendChild(section)
 
-    if (previousDays !== 0) {
-        for (i = previousDays; i < 0; i++) {
-            section.appendChild(createDayBlock(i, id))
-        }
-    }
-    for (i = 0; i < nextDays + 1; i ++) {
-        section.appendChild(createDayBlock(i, id))
-    }
+    for (i = previousDays; i >= 0; i--) {
+            section.appendChild(generateDayBlock(i, id))
+    }   
 
     saveSectionData(section)
 }
@@ -134,11 +144,4 @@ function saveSectionData(section) {
 
 generateDaysSection('oi')
 generateDaysSection('cu')
-generateDaysSection('tu')
-generateDaysSection('é')
-generateDaysSection('chato')
-generateDaysSection('mas')
-generateDaysSection('eu')
-generateDaysSection('te')
-generateDaysSection('amo')
-generateDaysSection('muito')
+
