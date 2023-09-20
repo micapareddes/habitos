@@ -11,18 +11,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Inclusive+Sans&display=swap" rel="stylesheet">
 </head>
 <body id="root">
-    <section id="habit">
-        <button id="add-habit">+</button>
-        <div id="dialog">
+    <section id="adding-new-habit">
+        <button id="add-habit-button">+</button>
+        <div id="dialog-container">
             <div id="dialog-content">
                 <h1>Adicione seu hábito!</h1>
-                <input type="text" name="habito" value="ex. 1min Streching" id="novo-habito">
-                <label for="novo-habito"></label>
-                <button onclick="saveHabit()">Save</button>
+                <input type="text" name="habit" aria-label="Name of new habit" placeholder="ex. 1min Streching" id="new-habit-input">
+                <label for="new-habit-input"></label>
+                <button onclick="saveHabit()" class="primary-button" id="save-habit-button" aria-label="Add new habit"></button>>Save</button>
             </div>
         </div>
     </section>
-    <script src="./js/newHabit.js"></script> 
-    <script src="./js/createDays.js"></script> 
+    <script src="./js/localStorage.js"></script>
+    <script src="./js/habitCalendar.js"></script> 
+    <script src="./js/dialog.js"></script>
+    <script src="./js/habits.js"></script> 
 </body>
 </html>

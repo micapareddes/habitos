@@ -1,0 +1,2 @@
+- Se queremos que uma função já criada seja excecutada no disparo de um evento devemos usar o arrow function, caso contrario estaremos apenas chamando a função, independente do evento.(exemplo em 'createDays.js/addEventListenerToCheckbox()')
+- .closest('') seletor css dentro dos parenteses
