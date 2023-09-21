@@ -6,6 +6,21 @@ function createHTMLElement(type) {
 }
 
 // habit
+function createHabitTag(habitName) {
+    const habitNameDiv = createHTMLElement('div')
+    habitNameDiv.classList = "habit-name-tag"
+    const title = createHTMLElement('h3')
+    title.textContent = 'Habits'
+    const createdHabitName = createHTMLElement('p')
+    createdHabitName.textContent = habitName
+    habitNameDiv.appendChild(title)
+    habitNameDiv.appendChild(createdHabitName)
+    return habitNameDiv
+}
+function appendHabitTagOnSection(habitSection, habitName) {
+    const habitNameDiv = createHabitTag(habitName)
+    habitSection.appendChild(habitNameDiv)
+}
 function createDateDiv(offsetDays) {
     const dateDiv = createHTMLElement('div')
     dateDiv.classList = "date-div"
@@ -68,6 +83,7 @@ function newHabit(habitName) {
     habitSection.id = habitName
     habitSection.classList = "habit-section"
 
+    appendHabitTagOnSection(habitSection, habitName)
     createCalendar(habitSection, habitName)
 
     root.appendChild(habitSection)

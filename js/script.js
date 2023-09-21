@@ -16,21 +16,45 @@ function habitInputIsValid(habitName) {
     } 
     return true
 }
+function exibitCalendarDates(habitName) {
+    const section = document.getElementById(habitName)
+    const dateDiv = section.querySelectorAll('.date-div')
+    dateDiv.forEach(dateDiv => {dateDiv.style.display = "flex"})
+}
+function exibitHabitTitle(habitName) {
+    const section = document.getElementById(habitName)
+    const title = section.querySelector('.habit-name-tag h3')
+    title.style.display = "flex"
+}
+function getHeightOfInput(habitName) {
+    const section = document.getElementById(habitName)
+    return section.offsetHeight
+}
+function setHeightOnCSS(habitName, add=0) {
+    const section = document.getElementById(habitName)
+    const habitNameTag = section.querySelector('.habit-name-tag')
+    const heightInPixels = getHeightOfInput(habitName)
+    habitNameTag.style.height = heightInPixels + add + 'px'
+    console.log(heightInPixels)
+
+}
 function saveHabit() {
     const habitName = document.getElementById('new-habit-input').value;
+
     if (habitInputIsValid(habitName)) {
         const habitNameArray = addHabitNameToArray(habitName)
+        
         if (habitNameArray[0] === habitName){
             newHabit(habitName)
+            exibitHabitTitle(habitName)
+            exibitCalendarDates(habitName)
+            
         } else{
             newHabit(habitName)
-            const section = document.getElementById(habitName)
-            const dateDiv = section.querySelectorAll('.date-div')
-            dateDiv.forEach(dateDiv => {dateDiv.style.display = "none"})
+            setHeightOnCSS(habitName) 
+            
         }
         closeDialog()
-
-        
     }
 }
 function alwaysExibitHabits() {
@@ -38,19 +62,16 @@ function alwaysExibitHabits() {
     habitNameArray.forEach((habitName, index) => {
         if (index === 0) {
             newHabit(habitName)
+            exibitHabitTitle(habitName)
+            exibitCalendarDates(habitName)
+
         } else {
             newHabit(habitName)
-            const section = document.getElementById(habitName)
-            const dateDiv = section.querySelectorAll('.date-div')
-            dateDiv.forEach(dateDiv => {dateDiv.style.display = "none"})
+            setHeightOnCSS(habitName) 
         }
         });
 }
-// saveHabitButton.addEventListener('keydown', (event) => {
-//     if (event.key == "Enter" || event.key == "Return") {
-//         saveHabit()
-//     }
-// })
+
 createEmptyArrayOnLocalStorage('createdHabitsArray')
 openDialog(createNewHabitButton)    
 alwaysExibitHabits()

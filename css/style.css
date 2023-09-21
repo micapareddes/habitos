@@ -1,9 +1,37 @@
 @import url(global.css);
 @import url(components.css);
 
-
+#hide-checkboxes {
+    background-color: white;
+    width: 206px;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
 
 /* calendar */
+.habit-name-tag {
+    display: grid;
+    align-items: center;
+    justify-content: end;
+    position: absolute;
+    height: 131px;
+    width: 180px;
+    z-index: 2;
+}
+
+.habit-name-tag h3 {
+    display: none;
+    align-self: self-start;
+    margin-top: 10px;
+}
+
+.habit-name-tag p {
+    align-self: center;
+}
+
 .habit-section {
     display: flex;
     gap: 1px;
@@ -17,7 +45,8 @@
 }
 
 .date-div {
-    display: flex;
+    position: relative;
+    display: none;
     color: #454545;
     flex-direction: column;
     align-items: center;
@@ -109,4 +138,8 @@
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     align-self: center;
     padding: 5px 10px;
+}
+
+@media(max-width: 600px) {
+    
 }

@@ -10,8 +10,7 @@ function setDataOnLocalStorage(id, array) {
 }
 function deleateDataFromLocalStorage(id) {
     localStorage.removeItem(id)
- }
-
+}
  function createEmptyArrayOnLocalStorage(id) {
     const emptyArray = []
     return localStorage.setItem(id, JSON.stringify(emptyArray))
